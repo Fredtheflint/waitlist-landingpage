@@ -46,8 +46,9 @@
                     updateEnabled: true
                 })
             })
-            .then(response => {
-                if (response.ok) {
+            .then(response => response.json())
+            .then(data => {
+                if (data.id) {
                     alert("Thank you for signing up!");
                     document.getElementById("signupForm").reset();
                 } else {
@@ -59,3 +60,4 @@
     </script>
 </body>
 </html>
+
