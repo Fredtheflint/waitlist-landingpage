@@ -33,21 +33,24 @@
             const name = document.getElementById("name").value;
             const email = document.getElementById("email").value;
 
+            console.log("Submitting:", { name, email });
+
             fetch("https://api.brevo.com/v3/contacts", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    "api-key": "9b79b709ee896035b3c3c2beb27f22d985534d20f32e685aec823e38e5ea5216-VzWcZlwIaOc8iXqE"
+                    "api-key": "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"
                 },
                 body: JSON.stringify({
                     email: email,
                     attributes: { NAME: name },
-                    listIds: [3],  // Listen-ID für "Hoilihub Waitlist"
+                    listIds: [LIST_ID],
                     updateEnabled: true
                 })
             })
             .then(response => response.json())
             .then(data => {
+                console.log("Response:", data);
                 if (data.id) {
                     alert("Thank you for signing up!");
                     document.getElementById("signupForm").reset();
@@ -55,8 +58,12 @@
                     alert("Oops! Something went wrong.");
                 }
             })
-            .catch(error => console.error("Error:", error));
+            .catch(error => {
+                console.error("Error:", error);
+                alert("An error occurred. Check console for details.");
+            });
         });
     </script>
 </body>
 </html>
+
