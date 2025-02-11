@@ -12,18 +12,50 @@
         <p>
             Imagine a transformative movement that unites your mind, body, and soul – and rewards you for it!
             Our Holistic Service Platform is pioneering the Symbiotic Exchange Model, where wellness is the true currency. No money involved – just the power of giving and receiving. Earn points by offering your skills or embracing self-care challenges, then redeem them for incredible services like yoga, coaching, and healing treatments.
-Practitioners make the most of their time, users thrive, and together we create a flourishing ecosystem built on fairness, sustainability, and mutual support.
-Join the movement and help redefine wellness – in a way that’s innovative, fair, and truly empowering.
+            Practitioners make the most of their time, users thrive, and together we create a flourishing ecosystem built on fairness, sustainability, and mutual support.
+            Join the movement and help redefine wellness – in a way that’s innovative, fair, and truly empowering.
         </p>
-        <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
-            <input type="text" name="name" placeholder="Name" required>
-            <input type="email" name="email" placeholder="Email" required>
+        <form id="signupForm">
+            <input type="text" id="name" name="name" placeholder="Name" required>
+            <input type="email" id="email" name="email" placeholder="Email" required>
             <label>
-                <input type="checkbox" required>
+                <input type="checkbox" id="consent" required>
                 I accept the above information will be used to subscribe me to this list.
             </label>
             <button type="submit">Submit</button>
         </form>
     </div>
+
+    <script>
+        document.getElementById("signupForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            const name = document.getElementById("name").value;
+            const email = document.getElementById("email").value;
+
+            fetch("https://api.brevo.com/v3/contacts", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "api-key": "9b79b709ee896035b3c3c2beb27f22d985534d20f32e685aec823e38e5ea5216-VzWcZlwIaOc8iXqE"
+                },
+                body: JSON.stringify({
+                    email: email,
+                    attributes: { NAME: name },
+                    listIds: [3],  // Listen-ID für "Hoilihub Waitlist"
+                    updateEnabled: true
+                })
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert("Thank you for signing up!");
+                    document.getElementById("signupForm").reset();
+                } else {
+                    alert("Oops! Something went wrong.");
+                }
+            })
+            .catch(error => console.error("Error:", error));
+        });
+    </script>
 </body>
 </html>
