@@ -1,19 +1,31 @@
-/* Hintergrundbild ohne Overlay */
+/* Container für den gesamten Bildschirm */
 body {
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
-    background: url('background.jpg') no-repeat center center/cover;
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
+    position: relative;
+}
+
+/* Hintergrundbild mit dunkler Overlay-Schicht */
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('background.jpg') no-repeat center center/cover;
+    filter: brightness(50%); /* Hier wird das Bild abgedunkelt */
+    z-index: -1;
 }
 
 /* Hauptcontainer */
 .overlay {
-    background: none; /* Kein dunkler Overlay */
     color: white;
     padding: 20px;
     max-width: 90%;
@@ -72,4 +84,42 @@ button {
     border: none;
     padding: 14px;
     font-size: 18px;
-    border-radius: 5px
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    transition: 0.3s;
+}
+
+/* Button Hover Effekt */
+button:hover {
+    background: #6a008a;
+}
+
+/* Mobile Anpassungen */
+@media (max-width: 768px) {
+    body {
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .overlay {
+        padding: 15px;
+        max-width: 90%;
+        width: 400px;
+    }
+
+    h1 {
+        font-size: 28px;
+    }
+
+    p {
+        font-size: 14px;
+    }
+
+    input, button {
+        font-size: 16px;
+        padding: 10px;
+    }
+}
