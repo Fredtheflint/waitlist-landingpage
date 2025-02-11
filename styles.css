@@ -1,4 +1,4 @@
-/* Hintergrundbild mit dunklem Overlay */
+/* Hintergrundbild ohne Overlay */
 body {
     margin: 0;
     padding: 0;
@@ -11,33 +11,33 @@ body {
     text-align: center;
 }
 
-/* Dunkler Overlay für bessere Lesbarkeit */
+/* Hauptcontainer */
 .overlay {
-    background: rgba(0, 0, 0, 0.7);
+    background: none; /* Kein dunkler Overlay */
     color: white;
-    padding: 40px;
-    border-radius: 10px;
-    max-width: 600px;
+    padding: 20px;
+    max-width: 90%;
+    width: 500px;
 }
 
 /* Überschrift */
 h1 {
-    font-size: 40px;
-    margin-bottom: 20px;
+    font-size: 36px;
+    margin-bottom: 10px;
 }
 
 /* Beschreibungstext */
 p {
     font-size: 16px;
-    line-height: 1.6;
-    margin-bottom: 20px;
+    line-height: 1.4;
+    margin-bottom: 15px;
 }
 
 /* Eingabefelder */
 input {
     width: 100%;
     padding: 12px;
-    margin: 10px 0;
+    margin: 8px 0;
     border: 1px solid white;
     border-radius: 5px;
     font-size: 16px;
@@ -52,32 +52,24 @@ input::placeholder {
 
 /* Checkbox */
 label {
-    display: block;
+    display: flex;
+    align-items: center;
     font-size: 14px;
-    margin: 10px 0;
+    justify-content: center;
 }
 
 /* Checkbox Styling */
 input[type="checkbox"] {
     width: 16px;
     height: 16px;
-    vertical-align: middle;
+    margin-right: 8px;
 }
 
 /* Button */
 button {
-    background: purple;
+    background: #800080;
     color: white;
     border: none;
-    padding: 12px;
+    padding: 14px;
     font-size: 18px;
-    border-radius: 5px;
-    cursor: pointer;
-    width: 100%;
-    transition: 0.3s;
-}
-
-/* Button Hover Effekt */
-button:hover {
-    background: #6a008a;
-}
+    border-radius: 5px
