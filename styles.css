@@ -32,13 +32,13 @@ body::before {
     color: white;
     padding: 20px;
     max-width: 90%;
-    width: 500px;
+    width: 450px;
 }
 
 /* Überschrift */
 h1 {
     font-family: 'Lora', serif;
-    font-size: 36px;
+    font-size: 34px;
     margin-bottom: 10px;
     font-weight: 700;
 }
@@ -52,7 +52,8 @@ p {
 
 /* Eingabefelder */
 input {
-    width: 100%;
+    width: 90%;
+    max-width: 350px; /* Eingabefelder werden nicht zu lang */
     padding: 12px;
     margin: 8px 0;
     border: 1px solid white;
@@ -74,13 +75,16 @@ label {
     align-items: center;
     font-size: 14px;
     justify-content: center;
+    gap: 10px;
+    max-width: 350px;
+    margin: auto;
 }
 
 /* Checkbox Styling */
 input[type="checkbox"] {
-    width: 16px;
-    height: 16px;
-    margin-right: 8px;
+    width: 18px;
+    height: 18px;
+    margin: 5px;
 }
 
 /* Button */
@@ -88,8 +92,46 @@ button {
     background: #800080;
     color: white;
     border: none;
-    padding: 14px;
-    font-size: 18px;
+    padding: 12px;
+    font-size: 16px;
     border-radius: 5px;
     cursor: pointer;
-    
+    width: 90%;
+    max-width: 350px; /* Button passt sich jetzt gut an */
+    transition: 0.3s;
+    font-family: 'Lora', serif;
+}
+
+/* Button Hover Effekt */
+button:hover {
+    background: #6a008a;
+}
+
+/* Mobile Anpassungen */
+@media (max-width: 768px) {
+    body {
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .overlay {
+        padding: 15px;
+        max-width: 90%;
+        width: 380px;
+    }
+
+    h1 {
+        font-size: 28px;
+    }
+
+    p {
+        font-size: 14px;
+    }
+
+    input, button {
+        font-size: 16px;
+        padding: 10px;
+    }
+}
