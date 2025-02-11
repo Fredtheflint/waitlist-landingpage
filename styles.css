@@ -1,4 +1,4 @@
-/* Hintergrundbild & Styling */
+/* Hintergrundbild mit dunklem Overlay */
 body {
     margin: 0;
     padding: 0;
@@ -11,7 +11,7 @@ body {
     text-align: center;
 }
 
-/* Dunkler Overlay-Effekt */
+/* Dunkler Overlay für bessere Lesbarkeit */
 .overlay {
     background: rgba(0, 0, 0, 0.7);
     color: white;
@@ -26,14 +26,28 @@ h1 {
     margin-bottom: 20px;
 }
 
+/* Beschreibungstext */
+p {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
 /* Eingabefelder */
 input {
     width: 100%;
-    padding: 10px;
+    padding: 12px;
     margin: 10px 0;
-    border: none;
+    border: 1px solid white;
     border-radius: 5px;
     font-size: 16px;
+    background: transparent;
+    color: white;
+}
+
+/* Eingabefeld Placeholder Text */
+input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
 }
 
 /* Checkbox */
@@ -41,6 +55,13 @@ label {
     display: block;
     font-size: 14px;
     margin: 10px 0;
+}
+
+/* Checkbox Styling */
+input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    vertical-align: middle;
 }
 
 /* Button */
@@ -53,4 +74,10 @@ button {
     border-radius: 5px;
     cursor: pointer;
     width: 100%;
+    transition: 0.3s;
+}
+
+/* Button Hover Effekt */
+button:hover {
+    background: #6a008a;
 }
