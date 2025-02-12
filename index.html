@@ -1,92 +1,123 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Coming Soon</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Coming Soon</title>
+  <link rel="stylesheet" href="styles.css"/>
 </head>
 <body>
-    <div class="overlay">
-        <h1>COMING SOON :)</h1>
-        <p>
-            Imagine a transformative movement that unites your mind, body, and soul – and rewards you for it!
-            Our Holistic Service Platform is pioneering the Symbiotic Exchange Model, where wellness is the true currency. 
-            No money involved – just the power of giving and receiving. Earn points by offering your skills or embracing 
-            self-care challenges, then redeem them for incredible services like yoga, coaching, and healing treatments.
-            Practitioners make the most of their time, users thrive, and together we create a flourishing ecosystem 
-            built on fairness, sustainability, and mutual support.
-            Join the movement and help redefine wellness – in a way that’s innovative, fair, and truly empowering.
-        </p>
-        
-        <form id="signup-form">
-            <input type="text" id="name" name="name" placeholder="Name" required>
-            <input type="email" id="email" name="email" placeholder="Email" required>
-            <label>
-                <input type="checkbox" id="consent" required>
-                I accept the above information will be used to subscribe me to this list.
-            </label>
-            <button type="submit">Submit</button>
-        </form>
-        
-        <p id="response-message"></p>
-    </div>
+  <div class="overlay">
+    <h1>COMING SOON :)</h1>
+    <p>
+      Imagine a transformative movement that unites your mind, body, and soul – and rewards you for it!
+      Our Holistic Service Platform is pioneering the Symbiotic Exchange Model, where wellness is the true currency. 
+      No money involved – just the power of giving and receiving. Earn points by offering your skills or embracing 
+      self-care challenges, then redeem them for incredible services like yoga, coaching, and healing treatments.
+      Practitioners make the most of their time, users thrive, and together we create a flourishing ecosystem 
+      built on fairness, sustainability, and mutual support.
+      Join the movement and help redefine wellness – in a way that’s innovative, fair, and truly empowering.
+    </p>
+    
+    <!-- Dein Formular -->
+    <form id="signup-form">
+      <input 
+        type="text" 
+        id="name" 
+        name="name" 
+        placeholder="Name" 
+        required
+      />
+      <input 
+        type="email" 
+        id="email" 
+        name="email" 
+        placeholder="Email" 
+        required
+      />
+      <label>
+        <input 
+          type="checkbox" 
+          id="consent" 
+          required
+        />
+        I accept the above information will be used to subscribe me to this list.
+      </label>
+      <button type="submit">Submit</button>
+    </form>
 
-    <script>
-        document.getElementById("signup-form").addEventListener("submit", async function(event) {
-            event.preventDefault(); // Verhindert das Neuladen der Seite
+    <!-- Hier wird die Rückmeldung angezeigt -->
+    <p id="response-message"></p>
+  </div>
 
-            const name = document.getElementById("name").value.trim();
-            const email = document.getElementById("email").value.trim();
-            const consent = document.getElementById("consent").checked;
-            const responseMessage = document.getElementById("response-message");
+  <script>
+    // WICHTIG: Bitte hier deinen eigenen API-Key einfügen
+    // Beispiel: const apiKey = "xkeysib-12345...-XYZ";
+    const apiKey = "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"; 
+    
+    // Falls deine Listen-ID nicht 3 ist, bitte anpassen
+    const listId = 3;
 
-            if (!consent) {
-                responseMessage.innerText = "You must accept the terms to proceed.";
-                responseMessage.style.color = "red";
-                return;
-            }
+    // Formular-EventListener
+    document.getElementById("signup-form").addEventListener("submit", async function(event) {
+      event.preventDefault(); // Verhindert das automatische Neuladen
 
-            if (!name || !email) {
-                responseMessage.innerText = "Please fill in all fields.";
-                responseMessage.style.color = "red";
-                return;
-            }
+      // Eingabewerte auslesen
+      const nameInput = document.getElementById("name").value.trim();
+      const emailInput = document.getElementById("email").value.trim();
+      const consentChecked = document.getElementById("consent").checked;
+      const responseMessage = document.getElementById("response-message");
 
-            const apiKey = "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"; // Ersetze mit deinem echten API Key oder verwende eine Umgebungsvariable
-            const listId = 3; // Ersetze mit deiner tatsächlichen Listen-ID in Brevo
+      // Erste Checks
+      if (!consentChecked) {
+        responseMessage.innerText = "You must accept the terms to proceed.";
+        responseMessage.style.color = "red";
+        return;
+      }
 
-            try {
-                const response = await fetch("https://api.brevo.com/v3/contacts", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "accept": "application/json",
-                        "api-key": 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
-                    },
-                    body: JSON.stringify({
-                        email: email,
-                        attributes: { NAME: name },
-                        listIds: [listId],
-                        updateEnabled: true
-                    })
-                });
+      if (!nameInput || !emailInput) {
+        responseMessage.innerText = "Please fill in all fields.";
+        responseMessage.style.color = "red";
+        return;
+      }
 
-                const result = await response.json();
-
-                if (response.ok) {
-                    responseMessage.innerText = "Thank you for signing up!";
-                    responseMessage.style.color = "green";
-                    document.getElementById("signup-form").reset();
-                } else {
-                    responseMessage.innerText = "Oops! Something went wrong: " + (result.message || "Unknown error");
-                    responseMessage.style.color = "red";
-                }
-            } catch (error) {
-                responseMessage.innerText = "An error occurred. Please try again later.";
-                responseMessage.style.color = "red";
-            }
+      try {
+        // API-Call an Brevo
+        const response = await fetch("https://api.brevo.com/v3/contacts", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "accept": "application/json",
+            "api-key": apiKey
+          },
+          body: JSON.stringify({
+            email: emailInput,
+            attributes: { NAME: nameInput },
+            listIds: [listId],
+            updateEnabled: true
+          })
         });
-    </script>
+
+        // Antwort aus Brevo in JSON umwandeln
+        const result = await response.json();
+
+        // Erfolg oder Fehler?
+        if (response.ok) {
+          responseMessage.innerText = "Thank you for signing up!";
+          responseMessage.style.color = "green";
+          // Formular zurücksetzen
+          document.getElementById("signup-form").reset();
+        } else {
+          // Es kam ein Fehler zurück
+          responseMessage.innerText = "Oops! Something went wrong: " + (result.message || "Unknown error");
+          responseMessage.style.color = "red";
+        }
+      } catch (error) {
+        // Netzwerkfehler oder andere Ausnahmen
+        responseMessage.innerText = "An error occurred. Please try again later.";
+        responseMessage.style.color = "red";
+      }
+    });
+  </script>
 </body>
 </html>
