@@ -60,8 +60,9 @@
             console.log("DEBUG: Sende Daten an Google Apps Script:", { name: name, email: email });
 
             try {
-                const response = await fetch("https://script.google.com/macros/s/AKfycbzDMKGDawhEGsgAL_lYbVuT6P-ENs9Ng8_s1zfLg2HCKuipE3hCk62RgWNTcQXHRFXnqA/exec", {  
+                const response = await fetch("https://script.google.com/macros/s/AKfycbw5aB7_o270KLDa0sHLe-Z6Dl-J0o2fzd_Hur1dQGPl-bWs8r8yY1iUOBH7ChmM0OkGdA/exec", {  
                     method: "POST",
+                    mode: "cors", // ✅ Stellt sicher, dass CORS genutzt wird
                     headers: {
                         "Content-Type": "application/json"
                     },
