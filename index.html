@@ -54,7 +54,7 @@
             }
 
             try {
-                const response = await fetch("https://script.google.com/macros/s/AKfycbzlq--4WWa9OhulNee1dtUWJgE0Yd1J42ovUg6NCsqRRIITAQWBNCd0oXX-RTvGl0DaFw/exec", {  
+                const response = await fetch("https://script.google.com/macros/s/AKfycbzvi-XfSFTnL2RET12MN3w86srdaMLqdfBs-F90VyDgr366JJl7apMyE0UTWEC9L-kNPw/exec", {  
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"
@@ -75,6 +75,7 @@
             } catch (error) {
                 responseMessage.innerText = "An error occurred. Please try again later.";
                 responseMessage.style.color = "red";
+                console.error("Fetch Error:", error);
             }
         });
     </script>
