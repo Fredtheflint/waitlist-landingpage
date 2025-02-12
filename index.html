@@ -42,19 +42,17 @@
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    "api-key": "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"
+                    "accept": "application/json",
+                    "api-key": "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"
                 },
                 body: JSON.stringify({
                     email: email,
                     attributes: { NAME: name },
-                    listIds: [3], 
+                    listIds: [3],
                     updateEnabled: true
                 })
             })
-            .then(response => {
-                console.log("📢 Antwort von Brevo erhalten:", response);
-                return response.json();
-            })
+            .then(response => response.json())
             .then(data => {
                 console.log("📢 Antwort von Brevo (JSON):", data);
                 if (data.id) {
@@ -62,6 +60,7 @@
                     document.getElementById("signupForm").reset();
                 } else {
                     alert("❌ Oops! Something went wrong.");
+                    console.error("🚨 Fehlerdetails:", data);
                 }
             })
             .catch(error => {
