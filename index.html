@@ -30,10 +30,13 @@
         document.getElementById("signupForm").addEventListener("submit", function(event) {
             event.preventDefault();
 
+            console.log("📢 Formular wurde abgeschickt!");
+
             const name = document.getElementById("name").value;
             const email = document.getElementById("email").value;
 
-            console.log("Submitting:", { name, email });
+            console.log("📢 Name:", name);
+            console.log("📢 Email:", email);
 
             fetch("https://api.brevo.com/v3/contacts", {
                 method: "POST",
@@ -44,26 +47,28 @@
                 body: JSON.stringify({
                     email: email,
                     attributes: { NAME: name },
-                    listIds: [LIST_ID],
+                    listIds: [3], 
                     updateEnabled: true
                 })
             })
-            .then(response => response.json())
+            .then(response => {
+                console.log("📢 Antwort von Brevo erhalten:", response);
+                return response.json();
+            })
             .then(data => {
-                console.log("Response:", data);
+                console.log("📢 Antwort von Brevo (JSON):", data);
                 if (data.id) {
-                    alert("Thank you for signing up!");
+                    alert("✅ Thank you for signing up!");
                     document.getElementById("signupForm").reset();
                 } else {
-                    alert("Oops! Something went wrong.");
+                    alert("❌ Oops! Something went wrong.");
                 }
             })
             .catch(error => {
-                console.error("Error:", error);
-                alert("An error occurred. Check console for details.");
+                console.error("🚨 Fehler beim API-Request:", error);
+                alert("❌ Ein Fehler ist aufgetreten. Bitte prüfe die Konsole.");
             });
         });
     </script>
 </body>
 </html>
-
